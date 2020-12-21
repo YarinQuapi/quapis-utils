@@ -1,0 +1,5 @@
+name: QuapiUtils
+version: ${project.version}
+main: xyz.yarinlevi.quapiutils.QuapiUtils
+api-version: 1.16
+authors: [ Quapi ]
