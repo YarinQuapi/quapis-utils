@@ -1,6 +1,7 @@
 messages:
   Test_Message: "This is a test message!"
-  NOT_ENOUGH_ARGUMENTS: "&Sorry, You are missing some arguments."
+  NOT_ENOUGH_ARGUMENTS: "&Sorry, you are missing some arguments."
   NO_RECENT_MSG: "Sorry, couldn't find anyone to reply to."
-  ERR_MSG_SELF: "Sorry, You cannot message yourself."
+  ERR_MSG_SELF: "Sorry, you cannot message yourself."
   ERR_PLAYER_NOT_FOUND: "Sorry, the player you requested was not found."
+  ERR_PLAYER_TP_SELF: "Sorry, you cannot teleport to yourself."

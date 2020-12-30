@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileUtils {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void registerData(File file, FileConfiguration data) {
         if(!file.exists()) {
             file.getParentFile().mkdirs();

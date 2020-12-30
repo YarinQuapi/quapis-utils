@@ -13,9 +13,9 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Nullable;
 import xyz.yarinlevi.quapiutils.QuapiUtils;
 import xyz.yarinlevi.quapiutils.files.FileUtils;
+import xyz.yarinlevi.quapiutils.utils.StringUtils;
 
 import java.io.File;
-import java.io.IOException;
 
 public class QPlayer implements Listener {
     final protected Player player;
@@ -23,9 +23,16 @@ public class QPlayer implements Listener {
     private final File playerFile;
     private final FileConfiguration data;
 
-    @Getter private boolean isPrivateMessage = true;
-    @Nullable @Getter @Setter private QPlayer lastMessaged;
+    /*
+    Permanent data
+     */
+    @Getter @Setter private boolean isPrivateMessage = true;
+    @Getter @Setter private boolean isFlyToggled = false;
 
+    /*
+    Temporary data
+     */
+    @Nullable @Getter @Setter private QPlayer lastMessaged;
     private final BukkitTask task;
 
 
@@ -47,20 +54,13 @@ public class QPlayer implements Listener {
         if (isFirstLogin) {
             data.set("isFirstLogin", false);
             data.set("privateMessage", isPrivateMessage);
+            data.set("flyToggle", isFlyToggled);
         } else {
             isPrivateMessage = data.getBoolean("privateMessage");
+            isFlyToggled = data.getBoolean("flyToggle");
         }
 
-        task = Bukkit.getScheduler().runTaskTimerAsynchronously(QuapiUtils.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    data.save(playerFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 0L, 900L);
+        task = Bukkit.getScheduler().runTaskTimerAsynchronously(QuapiUtils.getInstance(), this::save, 0L, 900L);
     }
 
 
@@ -69,15 +69,28 @@ public class QPlayer implements Listener {
     }
 
     public void message(String messageKey) {
-        this.player.sendMessage(QuapiUtils.getInstance().getMessageHandler().getMessage(messageKey));
+        this.player.sendMessage(QuapiUtils.getMessageHandler().getMessage(messageKey));
     }
 
     public void sendMessage(String message) {
-        this.player.sendMessage(message);
+        this.player.sendMessage(StringUtils.colorize(message));
+    }
+
+    public void sendMessage(String message, Object... args) {
+        this.player.sendMessage(StringUtils.colorize(message, args));
     }
 
     public String getDisplayName() {
         return this.player.getDisplayName();
+    }
+
+
+    // Data saving method
+    public void save() {
+        data.set("privateMessage", isPrivateMessage);
+        data.set("flyToggle", isFlyToggled);
+
+        FileUtils.save(playerFile, data);
     }
 
     /*
@@ -88,7 +101,7 @@ public class QPlayer implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (event.getPlayer() == player) {
             this.task.cancel();
-            FileUtils.save(playerFile, data);
+            this.save();
         }
     }
 }

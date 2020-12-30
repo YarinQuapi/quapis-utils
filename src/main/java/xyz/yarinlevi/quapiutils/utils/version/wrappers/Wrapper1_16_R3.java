@@ -1,4 +1,4 @@
-package xyz.yarinlevi.quapiutils.utils.version.warppers;
+package xyz.yarinlevi.quapiutils.utils.version.wrappers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,12 +11,6 @@ public class Wrapper1_16_R3 implements VersionWrapper {
     @Override
     public void register(String cmdString, Command command) {
         server.getCommandMap().register(cmdString, command);
-    }
-
-    @Override
-    public void register(String cmdString, Command command, String[] aliases) {
-        server.getCommandMap().register(cmdString, command);
-        server.getCommandAliases().put(command.getName(), aliases);
     }
 
     @Override

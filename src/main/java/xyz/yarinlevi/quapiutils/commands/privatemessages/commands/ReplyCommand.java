@@ -1,4 +1,4 @@
-package xyz.yarinlevi.quapiutils.privatemessages.commands;
+package xyz.yarinlevi.quapiutils.commands.privatemessages.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.yarinlevi.quapiutils.QuapiUtils;
 import xyz.yarinlevi.quapiutils.player.QPlayer;
-import xyz.yarinlevi.quapiutils.privatemessages.PrivateMessageUtils;
+import xyz.yarinlevi.quapiutils.commands.privatemessages.PrivateMessageUtils;
 
 public class ReplyCommand extends Command {
     public ReplyCommand(@NotNull String name) {

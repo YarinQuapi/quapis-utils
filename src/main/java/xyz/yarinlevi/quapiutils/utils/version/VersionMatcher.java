@@ -3,8 +3,7 @@ package xyz.yarinlevi.quapiutils.utils.version;
 import org.bukkit.Bukkit;
 import xyz.yarinlevi.quapiutils.QuapiUtils;
 import xyz.yarinlevi.quapiutils.utils.version.abstracts.VersionWrapper;
-import xyz.yarinlevi.quapiutils.utils.version.warppers.Wrapper1_16_R2;
-import xyz.yarinlevi.quapiutils.utils.version.warppers.Wrapper1_16_R3;
+import xyz.yarinlevi.quapiutils.utils.version.wrappers.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +12,11 @@ public class VersionMatcher {
     private final String serverVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].substring(1);
 
     private final List<Class<? extends VersionWrapper>> versions = Arrays.asList(
-            Wrapper1_16_R3.class,
-            Wrapper1_16_R2.class
+            Wrapper1_16_R3.class, // 1.16.4
+            Wrapper1_16_R2.class, // 1.16.3
+            Wrapper1_15_R1.class, // 1.15.2
+            Wrapper1_14_R3.class, // 1.14.4
+            Wrapper1_8_R3.class // 1.8.8
     );
 
     public VersionWrapper match() {

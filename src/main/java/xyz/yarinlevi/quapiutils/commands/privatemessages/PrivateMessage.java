@@ -1,4 +1,4 @@
-package xyz.yarinlevi.quapiutils.privatemessages;
+package xyz.yarinlevi.quapiutils.commands.privatemessages;
 
 import lombok.Getter;
 import lombok.Setter;

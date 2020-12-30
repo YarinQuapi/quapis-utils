@@ -1,4 +1,4 @@
-package xyz.yarinlevi.quapiutils.privatemessages;
+package xyz.yarinlevi.quapiutils.commands.privatemessages;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -38,7 +38,7 @@ public class PrivateMessageEvent extends Event implements Cancellable {
     }
 
     public QPlayer getFrom() {
-        return this.privateMessage.getTo();
+        return this.privateMessage.getFrom();
     }
 
 
@@ -64,4 +64,6 @@ public class PrivateMessageEvent extends Event implements Cancellable {
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;
     }
+
+    public static HandlerList getHandlerList() { return HANDLERS; }
 }
